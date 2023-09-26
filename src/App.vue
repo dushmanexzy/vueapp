@@ -120,6 +120,15 @@ export default {
       };
       this.showModal = false;
     },
+    sortBy(key) {
+      this.users.sort((a, b) => a[key].localeCompare(b[key]));
+    },
+    toggleSubordinates(user) {
+      if (user.subordinates && user.isExpanded) {
+        const userElem = user;
+        userElem.isExpanded = !userElem.isExpanded;
+      }
+    },
   },
 };
 </script>
@@ -157,6 +166,11 @@ export default {
   right: 0;
   padding: 10px;
   font-size: 2rem;
+  cursor: pointer;
+}
+
+.sort-by-key,
+.expand {
   cursor: pointer;
 }
 </style>
