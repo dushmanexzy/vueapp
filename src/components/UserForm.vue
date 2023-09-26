@@ -1,43 +1,41 @@
 <template>
-  <!-- Модальное окно -->
-  <div v-show="showModal" class="modal">
-    <div class="modal-content">
-      <span class="close" @click="handleCLose">&times;</span>
-      <!-- Форма для добавления пользователя -->
-      <h2>Добавление пользователя</h2>
-      <form @submit.prevent="saveUser">
-        <!--      Имя      -->
-        <div class="form-group">
-          <label for="name">Имя</label>
-          <input type="text" id="name" v-model="newUser.name" required>
-        </div>
-        <!--      Телефон      -->
-        <div class="form-group">
-          <label for="phone">Телефон</label>
-          <input type="text" id="phone" v-model="newUser.phone" required>
-        </div>
-        <!--      Начальник      -->
-        <div class="form-group">
-          <label for="phone">Начальник</label>
-          <select id="manager" v-model="newUser.manager">
-            <option value="" selected></option>
-            <option v-for="user in users" :value="user.name" :key="user.id">
-              {{ user.name }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <button type="submit">Сохранить</button>
-        </div>
-      </form>
-    </div>
+  <div v-show="showForm" class="app-right">
+    <span class="close" @click="handleCLose">&times;</span>
+    <!-- Форма для добавления пользователя -->
+    <h2 class="form-title">Добавление пользователя</h2>
+    <form @submit.prevent="saveUser" class="form">
+      <!--       Имя        -->
+      <div class="form-group">
+        <label for="name">Имя</label>
+        <input type="text" id="name" v-model="newUser.name" required>
+      </div>
+      <!--     Телефон      -->
+      <div class="form-group">
+        <label for="phone">Телефон</label>
+        <input type="text" id="phone" v-model="newUser.phone" required>
+      </div>
+      <!--     Начальник    -->
+      <div class="form-group">
+        <label for="phone">Начальник</label>
+        <select id="manager" v-model="newUser.manager">
+          <option value="" selected></option>
+          <option v-for="user in users" :value="user.name" :key="user.id">
+            {{ user.name }}
+          </option>
+        </select>
+      </div>
+      <!--     Сохранить    -->
+      <div class="form-group">
+        <button type="submit" class="save-btn">Сохранить</button>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    showModal: {
+    showForm: {
       type: Boolean,
       required: true,
       default: false,
@@ -87,24 +85,60 @@ export default {
 </script>
 
 <style scoped>
-.modal {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
+.app-right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid grey;
+  padding: 1.5rem;
+  width: 45%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7);
+  color: black;
 }
 
-.modal-content {
-  position: relative;
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
+.form-title {
+  margin: 0 0 2rem;
+  width: 100%;
+  text-align: left;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.form-group:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group select {
+  border-radius: 5px;
+  border: 2px solid grey;
+  width: 70%;
+  outline: none;
+}
+
+.save-btn {
+  border-radius: 20px;
+  border: 2px solid grey;
+
+  width: 100px;
+  height: 40px;
+
+  font-weight: 600;
+  color: black;
+  cursor: pointer;
 }
 
 .close {
