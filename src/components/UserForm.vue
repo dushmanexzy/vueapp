@@ -5,25 +5,26 @@
     <h2 class="form-title">Добавление пользователя</h2>
     <form @submit.prevent="saveUser" class="form">
       <!--       Имя        -->
-      <div class="form-group">
-        <label for="name">Имя</label>
-        <input type="text" id="name" v-model="newUser.name" required>
-      </div>
+      <BaseInputText
+        v-model="newUser.name"
+        :id-name="String('name')"
+        :label="String('Имя')"
+        class="form-group"
+      />
       <!--     Телефон      -->
-      <div class="form-group">
-        <label for="phone">Телефон</label>
-        <input type="text" id="phone" v-model="newUser.phone" required>
-      </div>
+      <BaseInputText
+        v-model="newUser.phone"
+        :id-name="String('phone')"
+        :label="String('Телефон')"
+        class="form-group"
+      />
       <!--     Начальник    -->
-      <div class="form-group">
-        <label for="phone">Начальник</label>
-        <select id="manager" v-model="newUser.manager">
-          <option value="" selected></option>
-          <option v-for="user in users" :value="user.name" :key="user.id">
-            {{ user.name }}
-          </option>
-        </select>
-      </div>
+      <BaseSelectUsers
+        v-model="newUser.manager"
+        :label="String('Начальник')"
+        :id-name="String('manager')"
+        class="form-group"
+      />
       <!--     Сохранить    -->
       <div class="form-group">
         <button type="submit" class="save-btn">Сохранить</button>
@@ -33,7 +34,11 @@
 </template>
 
 <script>
+import BaseInputText from './form/BaseInputText';
+import BaseSelectUsers from './form/BaseSelectUsers';
+
 export default {
+  components: { BaseSelectUsers, BaseInputText },
   props: {
     showForm: {
       type: Boolean,
@@ -121,20 +126,12 @@ export default {
   margin-bottom: 1.5rem;
 }
 
-.form-group input,
-.form-group select {
-  border-radius: 5px;
-  border: 2px solid grey;
-  width: 70%;
-  outline: none;
-}
-
 .save-btn {
   border-radius: 20px;
   border: 2px solid grey;
 
-  width: 100px;
-  height: 40px;
+  width: 120px;
+  height: 45px;
 
   font-weight: 600;
   color: black;
