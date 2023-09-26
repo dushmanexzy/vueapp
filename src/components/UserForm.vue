@@ -27,7 +27,7 @@
           </select>
         </div>
         <div class="form-group">
-          <button @click.prevent="saveUser">Сохранить</button>
+          <button type="submit">Сохранить</button>
         </div>
       </form>
     </div>
