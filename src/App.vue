@@ -99,7 +99,19 @@ export default {
       this.showModal = false;
     },
     saveUser() {
-      this.users.push(this.newUser);
+      this.newUser.id = Date.now();
+      const userCopy = { ...this.newUser };
+      if (this.newUser.manager) {
+        const manager = this.users.find(u => u.name === this.newUser.manager);
+        if (manager) {
+          if (!manager.subordinates) {
+            manager.subordinates = [];
+          }
+          manager.subordinates.push(userCopy);
+        } else {
+          this.users.push(userCopy);
+        }
+      }
       localStorage.setItem('users', JSON.stringify(this.users));
       this.newUser = {
         name: '',
