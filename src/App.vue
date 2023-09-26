@@ -1,19 +1,31 @@
 <template>
   <div id="app">
     <div class="app-container">
+      <!--   Add Button   -->
       <button @click="openModal">Добавить пользователя</button>
-
+      <!--   Users Table   -->
       <table>
+        <!--    Head Table    -->
         <thead>
           <tr>
-            <th>Имя</th>
-            <th>Телефон</th>
+            <th @click="sortBy('name')" class="sort-by-key">Имя</th>
+            <th @click="sortBy('phone')" class="sort-by-key">Телефон</th>
           </tr>
         </thead>
+        <!--    Body Table    -->
         <tbody v-if="users.length > 0">
           <tr v-for="user in users" :key="user.id">
-            <td>{{ user.name }}</td>
+            <td>
+              <span class="expand" @click="toggleSubordinates(user)">+</span>
+              {{ user.name }}
+            </td>
             <td>{{ user.phone }}</td>
+          </tr>
+          <tr v-if="user.isExpanded" v-for="user in users" :key="user.id">
+            <td v-for="subordinate in user.subordinates" :key="subordinate.phone">
+              <span>&nbsp;&nbsp;&nbsp;{{ subordinate.name }}</span>
+            </td>
+            <td v-if="user.isExpanded && user.subordinates">{{ user.phone }}</td>
           </tr>
         </tbody>
         <tbody v-else>
