@@ -34,6 +34,8 @@ export default {
     const usersWithDefaults = storedUsers.map(user => ({
       name: user.name || 'Неизвестно',
       phone: user.phone || 'Неизвестно',
+      subordinates: user.subordinates || [],
+      isExpanded: false,
     }));
     return {
       showModal: false,

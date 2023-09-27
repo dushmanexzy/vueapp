@@ -10,13 +10,13 @@
       </tr>
       </thead>
       <!--    Body Table    -->
-      <tbody v-if="users.length > 0">
-      <tr v-for="user in users" :key="user.id">
-        <td>
-          {{ user.name }}
-        </td>
-        <td>{{ user.phone }}</td>
-      </tr>
+      <tbody v-if="users.length > 0" v-for="user in users" :key="user.id">
+        <UserRow :user="user" :users="users" />
+
+        <tr v-if="user.isExpanded" v-for="subordinate in user.subordinates" :key="subordinate.id">
+          <td>{{ subordinate.name }}</td>
+          <td>{{ subordinate.phone }}</td>
+        </tr>
       </tbody>
       <tbody v-else>
       <tr>
@@ -28,7 +28,10 @@
 </template>
 
 <script>
+import UserRow from './UserRow';
+
 export default {
+  components: { UserRow },
   props: {
     users: {
       type: Array,
