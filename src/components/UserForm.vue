@@ -23,6 +23,7 @@
         v-model="newUser.manager"
         :label="String('Начальник')"
         :id-name="String('manager')"
+        :users="users"
         class="form-group"
       />
       <!--     Сохранить    -->
