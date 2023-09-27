@@ -18,6 +18,7 @@
           <td>{{ subordinate.phone }}</td>
         </tr>
       </tbody>
+      <!--    Body Table Else    -->
       <tbody v-else>
       <tr>
         <td colspan="2">Нет данных о пользователях.</td>
@@ -43,14 +44,6 @@ export default {
       sortParam: '',
     };
   },
-  methods: {
-    sortByName(a, b) {
-      return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1;
-    },
-    sortByPhone(a, b) {
-      return (a.phone.toLowerCase() > b.phone.toLowerCase()) ? 1 : -1;
-    },
-  },
   computed: {
     sortedList() {
       switch (this.sortParam) {
@@ -58,6 +51,14 @@ export default {
         case 'phone': return this.users.slice().sort(this.sortByPhone);
         default: return this.users;
       }
+    },
+  },
+  methods: {
+    sortByName(a, b) {
+      return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1;
+    },
+    sortByPhone(a, b) {
+      return (a.phone.toLowerCase() > b.phone.toLowerCase()) ? 1 : -1;
     },
   },
 };

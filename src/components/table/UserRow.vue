@@ -2,8 +2,8 @@
   <tr>
     <td>
       <span
-        @click="toggleSubordinates(user)"
         v-if="user.subordinates && user.subordinates.length > 0"
+        @click="toggleSubordinates(user)"
       >
         {{ user.isExpanded ? '-' : '+' }}
       </span>

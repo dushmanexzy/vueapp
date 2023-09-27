@@ -8,10 +8,9 @@
       >
         Добавить
       </button>
+
       <div class="app-main">
-        <UserTable
-          :users="users"
-        />
+        <UserTable :users="users" />
         <UserForm
           :users="users"
           :showForm="showModal"

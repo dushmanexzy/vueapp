@@ -7,7 +7,7 @@
       v-on:input="$emit('input', $event.target.value)"
     >
       <option value="" selected></option>
-      <option v-for="user in allUsers" :value="user.name" :key="user.id">
+      <option v-for="user in allUsers" :key="user.id" :value="user.name">
         {{ user.name }}
       </option>
     </select>

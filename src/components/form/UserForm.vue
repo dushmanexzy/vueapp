@@ -7,24 +7,24 @@
       <!--       Имя        -->
       <BaseInputText
         v-model="newUser.name"
+        class="form-group"
         :id-name="String('name')"
         :label="String('Имя')"
-        class="form-group"
       />
       <!--     Телефон      -->
       <BaseInputText
         v-model="newUser.phone"
+        class="form-group"
         :id-name="String('phone')"
         :label="String('Телефон')"
-        class="form-group"
       />
       <!--     Начальник    -->
       <BaseSelectUsers
         v-model="newUser.manager"
+        class="form-group"
         :label="String('Начальник')"
         :id-name="String('manager')"
         :users="users"
-        class="form-group"
       />
       <!--     Сохранить    -->
       <div class="form-group">
