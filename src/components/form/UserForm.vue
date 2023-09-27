@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import BaseInputText from './form/BaseInputText';
-import BaseSelectUsers from './form/BaseSelectUsers';
+import BaseInputText from './BaseInputText';
+import BaseSelectUsers from './BaseSelectUsers';
 
 export default {
   components: { BaseSelectUsers, BaseInputText },

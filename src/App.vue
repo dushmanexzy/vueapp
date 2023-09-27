@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import UserTable from './components/UserTable';
-import UserForm from './components/UserForm';
+import UserTable from './components/table/UserTable';
+import UserForm from './components/form/UserForm';
 
 export default {
   name: 'App',
