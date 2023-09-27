@@ -7,7 +7,7 @@
       v-on:input="$emit('input', $event.target.value)"
     >
       <option value="" selected></option>
-      <option v-for="user in users" :value="user.name" :key="user.id">
+      <option v-for="user in allUsers" :value="user.name" :key="user.id">
         {{ user.name }}
       </option>
     </select>
@@ -29,11 +29,30 @@ export default {
       type: String,
       required: true,
     },
+    users: {
+      type: Array,
+      required: true,
+      default: JSON.parse(localStorage.getItem('users')) || [],
+    },
   },
   data() {
     return {
-      users: JSON.parse(localStorage.getItem('users')) || [],
+      allUsers: [],
     };
+  },
+  created() {
+    this.allUsers = this.getAllUsers(this.users);
+  },
+  methods: {
+    getAllUsers(users) {
+      return users.reduce((allUsers, user) => {
+        allUsers.push(user);
+        if (user.subordinates && user.subordinates.length > 0) {
+          allUsers.push(...this.getAllUsers(user.subordinates));
+        }
+        return allUsers;
+      }, []);
+    },
   },
 };
 </script>
