@@ -5,12 +5,12 @@
       <!--    Head Table    -->
       <thead>
       <tr>
-        <th @click="sortBy('name')" class="sort-by-key">Имя</th>
-        <th @click="sortBy('phone')" class="sort-by-key">Телефон</th>
+        <th @click="sortParam='name'" class="sort-by-key">Имя</th>
+        <th @click="sortParam='phone'" class="sort-by-key">Телефон</th>
       </tr>
       </thead>
       <!--    Body Table    -->
-      <tbody v-if="users.length > 0" v-for="user in users" :key="user.id">
+      <tbody v-if="users.length > 0" v-for="user in sortedList" :key="user.id">
         <UserRow :user="user" :users="users" />
 
         <tr v-if="user.isExpanded" v-for="subordinate in user.subordinates" :key="subordinate.id">
@@ -40,11 +40,24 @@ export default {
   data() {
     return {
       showModal: false,
+      sortParam: '',
     };
   },
   methods: {
-    sortBy(key) {
-      this.users.sort((a, b) => a[key].localeCompare(b[key]));
+    sortByName(a, b) {
+      return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1;
+    },
+    sortByPhone(a, b) {
+      return (a.phone.toLowerCase() > b.phone.toLowerCase()) ? 1 : -1;
+    },
+  },
+  computed: {
+    sortedList() {
+      switch (this.sortParam) {
+        case 'name': return this.users.slice().sort(this.sortByName);
+        case 'phone': return this.users.slice().sort(this.sortByPhone);
+        default: return this.users;
+      }
     },
   },
 };
